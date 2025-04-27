@@ -4,6 +4,11 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
+  if (req.method === 'OPTIONS') {
+    // Handle preflight request
+    return res.status(200).end();
+  }
+
   const PRINTIFY_TOKEN = process.env.PRINTIFY_TOKEN;
 
   if (!PRINTIFY_TOKEN) {
